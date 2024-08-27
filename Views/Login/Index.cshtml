@@ -1,0 +1,25 @@
+@model NetProductApp.Models.Login
+
+<h1>Login</h1>
+
+<!-- Display error message if any -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form method="post" action="Login/Index">
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="Username" required />
+    <br />
+
+    <label for="password">Password:</label>
+    <input id="password" name="Password" type="password" required />
+    <br />
+
+    <button type="submit">Login</button>
+</form>
+<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Register">Register</a>

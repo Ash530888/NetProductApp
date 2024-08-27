@@ -1,0 +1,42 @@
+<h1>Register</h1>
+
+@if(TempData["ErrorMessage"] != null){
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if(TempData["SuccessMessage"] != null){
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form method="post" id="register_form" action="/Login/Register">
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="Username" required />
+    <br />
+
+    <label for="password1">Password:</label>
+    <input type="password" id="password1" name="Password1" pattern="(?=.*\d)(?=.*[!@@#$%^&*])(?=.*[a-zA-Z]).{8,}" required />
+    <br />
+
+    <label for="password2">Password:</label>
+    <input type="password" id="password2" name="Password2" pattern="(?=.*\d)(?=.*[!@@#$%^&*])(?=.*[a-zA-Z]).{8,}" required />
+    <br />
+
+    <button type="submit">Update</button>
+</form>
+
+<script>
+    document.getElementById("register_form").addEventListener("submit", function(event)){
+        string input1 = document.getElementById("password1").value;
+        string input2 = document.getElementById("password2").value;
+
+        if(input1 !== input2){
+            alert("Passwords entered do not match!");
+            event.preventDefault(); // prevents form from submitting
+        }
+    }
+</script>

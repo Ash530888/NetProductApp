@@ -1,0 +1,11 @@
+@model NetProductApp.Models.Product
+
+<h1>Delete Product</h1>
+
+<p>Are you sure you want to delete the product with ID @Model.id?</p>
+
+<form method="post" action="/Products/Delete/@Model.id">
+    <button type="submit">Delete</button>
+</form>
+
+<a href="/Products">Cancel</a>
