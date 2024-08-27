@@ -1,2 +1,3 @@
-dotnet run \n
+dotnet run
+
 psql -U postgres -d NetProductApp
