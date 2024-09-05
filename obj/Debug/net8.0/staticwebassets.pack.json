@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/images/icons/add.png",
+      "PackagePath": "staticwebassets/images/icons/add.png"
+    },
+    {
+      "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/images/icons/cart.png",
+      "PackagePath": "staticwebassets/images/icons/cart.png"
+    },
+    {
       "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/images/icons/edit.png",
       "PackagePath": "staticwebassets/images/icons/edit.png"
     },
@@ -67,6 +75,10 @@
     {
       "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/images/products/20240824225748395.png",
       "PackagePath": "staticwebassets/images/products/20240824225748395.png"
+    },
+    {
+      "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/images/products/20240829133131603.jpg",
+      "PackagePath": "staticwebassets/images/products/20240829133131603.jpg"
     },
     {
       "Id": "/Users/Admin/Desktop/MyDocs/NetProductApp/wwwroot/js/site.js",

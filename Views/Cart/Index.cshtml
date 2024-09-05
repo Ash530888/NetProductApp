@@ -1,0 +1,158 @@
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+            padding-bottom: 60px; /* Ensures enough space for footer */
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+        .product-image {
+            width: 100px;
+            height: auto;
+        }
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            width: 50px;
+            height: auto;
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+        }
+        .product-name {
+            color: gray;
+        }
+        .submit-btn {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    @if(TempData["MaxStockReached"] != null){
+            <div class="alert alert-danger">
+                @TempData["MaxStockReached"]
+            </div>
+    }
+    @if(TempData["InvalidQuantity"] != null){
+            <div class="alert alert-danger">
+                @TempData["InvalidQuantity"]
+            </div>
+    }
+
+    <div class="container">
+        <h1 class="mb-4">Cart</h1>
+
+            <table class="table table-striped">
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td><img src="@product.Key.image_path" alt="Product img" class="product-image"></td>
+                        <td>Price: £@product.Key.price</td>
+                        <td>
+                            <form id="quantity" action="/Cart/UpdateQuantity" method="post">
+                                <button type="submit" class="quantity-btn" name="action"  value="increase" id="increase" product-id="@product.Key.id" >+</button>
+
+                                <input type="number" step="1" id="quantity" product-id="@product.Key.id" name="quantity" class="quantity-input" value="@product.Value" min="1"/>
+                                <input type="hidden" name="productId" value="@product.Key.id">
+
+                                <button type="submit" class="quantity-btn" name="action"  value="decrease" id="decrease" product-id="@product.Key.id" >-</button>
+                                
+                                
+                            </form>
+                            
+                        </td>
+                        <td>
+                            <a href="/Cart/Delete/@product.Key.id" onclick="return confirm('Are you sure you want to remove this product from your cart?');">
+                                <img class="delete-button" src="/images/icons/trash.png" alt="Delete" title="Delete" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="product-name">@product.Key.name</td>
+                    </tr>
+                    
+                }
+            </table>
+
+            @{
+                if (Context.Session.GetString("UserRole") == "shopper")
+                {
+                    <p><a href="/Cart/Checkout">Checkout</a></p>
+                }
+                else
+                {
+                    <p><a href="/Login/Index">Login</a> to Checkout</p>
+                }
+            }
+            
+    </div>
+
+    <script>
+    document.querySelectorAll(".quantity-input").forEach(function (element) {
+    let debounceTimer;
+
+    element.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") event.preventDefault();
+    });
+
+    element.addEventListener("input", function (event) {
+        clearTimeout(debounceTimer); // Clear previous timer
+        event.preventDefault(); // Prevent form submission
+
+        var quantity = this.value;
+        var id = this.getAttribute("product-id");
+
+        // Set a timer to wait before sending the request
+        debounceTimer = setTimeout(function () {
+            if (quantity.length > 0) {
+                fetch(`/Cart/UpdateQuantityManualInput?id=${id}&quantity=${quantity}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        // Redirect manually after fetch is successful
+                        window.location.href = "/Cart/Index"; // Reload the cart page
+                    } else {
+                        console.error('Error updating quantity');
+                    }
+                }).catch(error => {
+                    console.error('Fetch error:', error);
+                });
+            }
+        }, 350); // Adjust debounce time (e.g., 300ms)
+    });
+});
+
+</script>
+
+
+    
+</body>
+</html>

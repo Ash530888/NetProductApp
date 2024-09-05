@@ -8,5 +8,6 @@ namespace NetProductApp.Models
 
         public DbSet<Product> Products {get; set;}
         public DbSet<Login> logins {get; set;}
+        public DbSet<Stock> stock {get; set;}
     }
 }

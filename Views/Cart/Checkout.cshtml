@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin: 20px;
+            padding-bottom: 60px;
+            margin-bottom: 60px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+        .product-image {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Checkout</h1>
+
+        <form>
+        <table class="table">
+        <div class="row">
+            
+            @foreach (var product in Model)
+            {
+                
+                    <tr>
+                        <td class="product-image-col">
+                            <img class="product-image" src="@product.Key.image_path" alt="Product Image" text="Product Image" />
+                        </td>
+                        <td class="product-quantity-col">@product.Value</td>
+                    </tr>
+                    <tr>
+                        <td class="product-name-col">@product.Key.name</td>
+                    </tr>
+                
+                
+            }
+           
+           <button type="submit" asp-controller="Cart" asp-action="Index"  >Edit Cart</button>
+           <button type="submit" asp-controller="Cart" asp-action="SuccessfulPayment" >Confirm Order (usually payment info entered)</button>
+        </div>
+        </table>
+        </form>
+    </div>
+</body>
+</html>

@@ -29,6 +29,16 @@
             cursor: pointer;
             z-index: 1050; /* large z-index ensure it's above other elements */
         }
+
+        .cart img{
+            position: fixed;
+            top: 20px; /* Distance from bottom */
+            right: 65px;  /* Distance from right */
+            width: 25px; /* Adjust icon size */
+            height: 25px;
+            cursor: pointer;
+            z-index: 1050; /* large z-index ensure it's above other elements */
+        }
     </style>
 </head>
 <body>
@@ -54,6 +64,11 @@
                         <li class="nav-item">
                             <a class="nav-link login" asp-area="" asp-controller="Login" asp-action="Index">
                                 <img src="images/icons/login.png" alt="Login" title="Login" />
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link cart" asp-area="" asp-controller="Cart" asp-action="Index">
+                                <img src="images/icons/cart.png" alt="Cart" title="Cart" />
                             </a>
                         </li>
                     </ul>

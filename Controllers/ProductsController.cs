@@ -21,8 +21,17 @@ namespace NetProductApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Products.ToListAsync();
-            return View(products);
+            // Joining the Products and Stock tables where there is stock available
+            var productsInStock = await _context.Products
+                                                .Join(_context.stock,
+                                                    p => p.id,        // joinging on id
+                                                    s => s.id,
+                                                    (p, s) => new { Product = p, Stock = s }) // Select both Product and Stock
+                                                .Where(ps => ps.Stock.num_instock > 0)  // Filter where num_instock is greater than 0
+                                                .Select(ps => ps.Product)  // Select the Product to return in the result
+                                                .ToListAsync();
+
+            return View(productsInStock);
         }
 
         // only admins authorised to create new products
@@ -158,6 +167,12 @@ namespace NetProductApp.Controllers
                 return RedirectToAction("Index");
             }
             else return Unauthorized();
+        }
+
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            Console.WriteLine("it works hereeee");
+            return RedirectToAction("Index");
         }
 
     }

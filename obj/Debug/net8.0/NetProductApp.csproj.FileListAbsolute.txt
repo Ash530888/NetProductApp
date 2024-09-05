@@ -36,3 +36,4 @@
 /Users/Admin/Desktop/MyDocs/NetProductApp/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
 /Users/Admin/Desktop/MyDocs/NetProductApp/obj/Debug/net8.0/NetProdu.B755A445.Up2Date
 /Users/Admin/Desktop/MyDocs/NetProductApp/bin/Debug/net8.0/BCrypt.Net-Next.dll
+/Users/Admin/Desktop/MyDocs/NetProductApp/obj/Debug/net8.0/NetProductApp.sourcelink.json
